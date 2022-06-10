@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import Navbar from "./Navbar";
-import Blog from "./Blog";
 import Footer from "./Footer";
+
+import { container, header, photoArray, footer } from "./Layout.module.scss";
 
 function Layout({ pageTitle, children }) {
   const data = useStaticQuery(graphql`
@@ -16,14 +17,15 @@ function Layout({ pageTitle, children }) {
   `);
 
   return (
-    <div>
+    <div className={container}>
       <title>
         {pageTitle} | {data.site.siteMetadata.title}
       </title>
-      <header>{pageTitle}</header>
-      <Navbar />
-      {children}
-      <Footer />
+      <header className={header}>
+        <Navbar />
+      </header>
+      <section className={photoArray}>{children}</section>
+      <Footer className={footer} />
     </div>
   );
 }
